@@ -1,0 +1,558 @@
+openapi: 3.0.3
+info:
+    title: 鳳梨選課 API
+    description: |-
+        RESTful API specification for the university course‑selection platform.
+        It covers authentication (sessions), users, announcements, courses and
+        enrollments (course selections).
+    version: 1.0.0
+servers:
+    - url: https://api.example.edu/v1
+paths:
+    /sessions:
+        post:
+            summary: 登入
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/LoginRequest'
+            responses:
+                '201':
+                    description: Session created
+                    headers:
+                        Set-Cookie:
+                            description: HttpOnly access_token & user_id cookie
+                            schema:
+                                type: string
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Session'
+                '401':
+                    $ref: '#/components/responses/Unauthorized'
+            tags: [Auth]
+        delete:
+            summary: 登出
+            security:
+                - bearerAuth: []
+            responses:
+                '204':
+                    description: Session deleted
+                '401':
+                    $ref: '#/components/responses/Unauthorized'
+            tags: [Auth]
+    /users:
+        post:
+            summary: 註冊新用戶號密碼
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/AccountCreate'
+            responses:
+                '201':
+                    description: 帳號密碼建立成功
+                    headers:
+                        Set-Cookie:
+                            description: public cookie
+                            schema:
+                                type: string
+                    content:
+                        application/json:
+                            schema:
+                                properties:
+                                    userID:
+                                        type: string
+                '409':
+                    $ref: '#/components/responses/Conflict'
+            tags: [Users]
+    /users/{userId}:
+        parameters:
+            - name: userId
+              in: path
+              required: true
+              schema:
+                  type: string
+              description: 使用這特殊ID
+        post:
+            summary: 註冊用戶相關資訊
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/UserCreate'
+            responses:
+                '204':
+                    description: 用戶建立成功
+                '409':
+                    $ref: '#/components/responses/Conflict'
+            tags: [Users]
+    /announcements:
+        get:
+            summary: 所有公告欄位
+            parameters:
+                - name: type
+                  in: query
+                  schema:
+                      type: string
+                  description: Optional filter (e.g., timeline)
+            responses:
+                '200':
+                    description: List of announcements
+                    content:
+                        application/json:
+                            schema:
+                                type: array
+                                items:
+                                    $ref: '#/components/schemas/Announcement'
+            tags: [Announcements]
+        post:
+            summary: Create an announcement
+            security:
+                - bearerAuth: []
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/AnnouncementCreate'
+            responses:
+                '201':
+                    description: Announcement created
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Announcement'
+            tags: [Announcements]
+    /announcements/{announcementId}:
+        parameters:
+            - $ref: '#/components/parameters/AnnouncementId'
+        get:
+            summary: Get an announcement
+            responses:
+                '200':
+                    description: Announcement
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Announcement'
+                '404':
+                    $ref: '#/components/responses/NotFound'
+            tags: [Announcements]
+        patch:
+            summary: Update an announcement
+            security:
+                - bearerAuth: []
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/AnnouncementUpdate'
+            responses:
+                '200':
+                    description: Updated announcement
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Announcement'
+                '404':
+                    $ref: '#/components/responses/NotFound'
+            tags: [Announcements]
+        delete:
+            summary: Delete an announcement
+            security:
+                - bearerAuth: []
+            responses:
+                '204':
+                    description: Deleted
+                '404':
+                    $ref: '#/components/responses/NotFound'
+            tags: [Announcements]
+    /courses:
+        get:
+            summary: List courses
+            parameters:
+                - name: page
+                  in: query
+                  schema:
+                      type: integer
+                      minimum: 1
+                - name: term
+                  in: query
+                  schema:
+                      type: string
+            responses:
+                '200':
+                    description: Course list
+                    content:
+                        application/json:
+                            schema:
+                                type: array
+                                items:
+                                    $ref: '#/components/schemas/Course'
+            tags: [Courses]
+        post:
+            summary: Create a course (teacher)
+            security:
+                - bearerAuth: []
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/CourseCreate'
+            responses:
+                '201':
+                    description: Course created
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Course'
+            tags: [Courses]
+    /courses/{courseId}:
+        parameters:
+            - $ref: '#/components/parameters/CourseId'
+        get:
+            summary: Get a course
+            responses:
+                '200':
+                    description: Course
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Course'
+                '404':
+                    $ref: '#/components/responses/NotFound'
+            tags: [Courses]
+        patch:
+            summary: Update a course
+            security:
+                - bearerAuth: []
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/CourseUpdate'
+            responses:
+                '200':
+                    description: Updated course
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Course'
+                '404':
+                    $ref: '#/components/responses/NotFound'
+            tags: [Courses]
+        delete:
+            summary: Delete a course
+            security:
+                - bearerAuth: []
+            responses:
+                '204':
+                    description: Deleted
+                '404':
+                    $ref: '#/components/responses/NotFound'
+            tags: [Courses]
+    /courses/{courseId}/enrollments:
+        parameters:
+            - $ref: '#/components/parameters/CourseId'
+        get:
+            summary: 查看每堂課選課狀態 (管理者)
+            security:
+                - bearerAuth: []
+            responses:
+                '200':
+                    description: Enrollment list
+                    content:
+                        application/json:
+                            schema:
+                                type: array
+                                items:
+                                    $ref: '#/components/schemas/Enrollment'
+            tags: [Enrollments]
+    /courses/enrollments:
+        post:
+            summary: 執行篩選
+            security:
+                - bearerAuth: []
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            type: object
+                            properties:
+                                filters:
+                                    type: object
+                                    description: 篩選條件物件
+                                callbackUrl:
+                                    type: string
+                                    description: 任務完成後的通知 URL（可選）
+                            required:
+                                - filters
+            responses:
+                '202':
+                    description: 任務已排程中
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                properties:
+                                    jobId:
+                                        type: string
+                                    status:
+                                        type: string
+                                        enum: ['pending', 'running']
+                '401':
+                    $ref: '#/components/responses/Unauthorized'
+                '404':
+                    $ref: '#/components/responses/NotFound'
+            tags: [Enrollments]
+    /users/{userId}/enrollments/{courseId}:
+        parameters:
+            - $ref: '#/components/parameters/CourseId'
+            - $ref: '#/components/parameters/UserId'
+        post:
+            summary: 選課
+            security:
+                - bearerAuth: []
+            responses:
+                '201':
+                    description: Enrollment created
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Enrollment'
+                '409':
+                    description: Already enrolled
+            tags: [Enrollments]
+        delete:
+            summary: 刪除選課(學生)
+            security:
+                - bearerAuth: []
+            responses:
+                '204':
+                    description: Enrollment deleted
+                '404':
+                    $ref: '#/components/responses/NotFound'
+            tags: [Enrollments]
+    /users/{userId}/enrollments:
+        parameters:
+            - $ref: '#/components/parameters/UserId'
+        get:
+            summary: 列出學生選課
+            security:
+                - bearerAuth: []
+            responses:
+                '200':
+                    description: Enrollment list
+                    content:
+                        application/json:
+                            schema:
+                                type: array
+                                items:
+                                    allOf:
+                                        - type: object
+                                          properties:
+                                              courseId:
+                                                  type: string
+                                        - $ref: '#/components/schemas/Enrollment'
+
+            tags: [Enrollments]
+
+components:
+    parameters:
+        UserId:
+            name: userId
+            in: path
+            required: true
+            schema:
+                type: string
+        CourseId:
+            name: courseId
+            in: path
+            required: true
+            schema:
+                type: string
+        AnnouncementId:
+            name: announcementId
+            in: path
+            required: true
+            schema:
+                type: string
+        EnrollmentId:
+            name: enrollmentId
+            in: path
+            required: true
+            schema:
+                type: string
+    responses:
+        NotFound:
+            description: Resource not found
+        Unauthorized:
+            description: Authentication required or failed
+        Conflict:
+            description: 資料重複或是缺少
+    securitySchemes:
+        bearerAuth:
+            type: http
+            scheme: bearer
+            bearerFormat: JWT
+    schemas:
+        LoginRequest:
+            type: object
+            required: [username, password]
+            properties:
+                username:
+                    type: string
+                password:
+                    type: string
+                    format: password
+        Session:
+            type: object
+            properties:
+                role:
+                    type: string
+                name:
+                    type: string
+                public_number:
+                    type: string
+        Account:
+            type: object
+            properties:
+                username:
+                    type: string
+                password:
+                    type: string
+        AccountCreate:
+            allOf:
+                - $ref: '#/components/schemas/Account'
+        User:
+            type: object
+            properties:
+                user_id:
+                    type: integer
+                public_number:
+                    type: string
+                name:
+                    type: string
+                depart_name:
+                    type: string
+                grade:
+                    type: integer
+                role:
+                    type: string
+        UserCreate:
+            allOf:
+                - $ref: '#/components/schemas/User'
+        Announcement:
+            type: object
+            properties:
+                id:
+                    type: string
+                    readOnly: true
+                title:
+                    type: string
+                content:
+                    type: string
+                annouce_date:
+                    type: string
+                    format: date-time
+                end_date:
+                    type: string
+                    format: date-time
+        AnnouncementCreate:
+            allOf:
+                - $ref: '#/components/schemas/Announcement'
+                - required: [title, content, announce_date]
+        AnnouncementUpdate:
+            allOf:
+                - $ref: '#/components/schemas/Announcement'
+        Course:
+            type: object
+            properties:
+                courseId:
+                    type: integer
+                    description: 課程流水號
+                    readOnly: true
+                departmentId:
+                    type: integer
+                    description: 開課系所代碼
+                department:
+                    type: string
+                    description: 開課系所代碼
+                teacherId:
+                    type: string
+                    description: 授課教師代碼
+                teacherName:
+                    type: string
+                    description: 教師名子
+                courseName:
+                    type: string
+                    description: 課程名稱
+                note:
+                    type: string
+                    description: 備註
+                outline:
+                    type: string
+                    description: 大綱
+                detailTime:
+                    type: string
+                    description: 詳細上課時段描述（如「週一 08:00–10:00」）
+                courseTime:
+                    type: integer
+                    description: 上課節數
+                classNumber:
+                    type: integer
+                    description: 教室編號或班級節次
+                chooseLimit:
+                    type: integer
+                    description: 選課人數上限
+                credit:
+                    type: integer
+                    description: 學分數
+                type:
+                    type: integer
+                    description: 課程種類代碼（必修、選修等）
+                grade:
+                    type: integer
+                    description: 開課年級
+                class:
+                    type: integer
+                    description: 班別編號
+            required:
+                - departmentId
+                - courseName
+                - credit
+                - courseTime
+                - detailTime
+                - classNumber
+                - type
+                - grade
+                - class
+
+        CourseCreate:
+            allOf:
+                - $ref: '#/components/schemas/Course'
+                - required: [title, teacherId]
+        CourseUpdate:
+            allOf:
+                - $ref: '#/components/schemas/Course'
+        Enrollment:
+            type: object
+            properties:
+                userId:
+                    type: string
+                    readOnly: true
+                status:
+                    type: string
+                    enum: [enrolled, dropped, waitlist]
+                    readOnly: true
+                enrolledAt:
+                    type: string
+                    format: date-time
