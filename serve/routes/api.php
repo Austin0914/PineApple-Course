@@ -46,3 +46,5 @@ Route::middleware('auth.session')->group(function () {
     Route::delete('/users/{userId}/enrollments/{courseId}', [EnrollmentsController::class, 'destroy']);
     Route::post('/courses/enrollments', [EnrollmentsController::class, 'batchProcess']);
 });
+
+Route::get('/statistics', [StatisticsController::class, 'index']);
