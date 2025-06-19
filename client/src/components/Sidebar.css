@@ -1,0 +1,190 @@
+.sidebar {
+  background-color: var(--style_one);
+  width: 300px;
+  max-width: 300px;
+  height: 100vh;
+  padding: 1rem;
+  gap: 1rem;
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 0;
+  left: 0;
+  transition: transform 0.2s ease-in-out;
+}
+.sidebar-collapsed {
+  transform: translateX(-100%);
+}
+
+.sidebar-collapsed .sidebar-header-expand-btn {
+  position: fixed;
+  left: 10px;
+  top: 10px;
+  background-color: var(--style_one);
+  border-radius: 50%;
+  padding: 8px;
+  z-index: 1000;
+  transform: rotate(180deg);
+}
+.sidebar-header {
+  height: 1.5rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.sidebar-header > div > img {
+  fill: white;
+  color: white;
+  height: 1.5rem;
+}
+
+.sidebar-header-expand-btn {
+  fill: white;
+  width: 1.7rem;
+  height: 1.7rem;
+}
+.sidebar-header-expand-btn:hover {
+  cursor: pointer;
+  scale: 1.2;
+}
+
+.sidebar-personal-info {
+  background-color: var(--style_two);
+  border-radius: 0.5rem;
+}
+
+.sidebar-personal-info-content {
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  align-items: center;
+  padding: 0.5rem 0.8rem;
+}
+.sidebar-personal-info-img {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 3.5rem;
+  height: 3.5rem;
+  background-color: var(--style_one);
+  color: white;
+  font-size: 2rem;
+  font-weight: 800;
+  padding: 0.2rem;
+  border-radius: 50%;
+}
+
+#sidebat-personal-info-name {
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.sidebar-course {
+  gap: 1rem;
+  margin: 1rem 0;
+}
+
+.sidebar-course > p {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--font_lightpurple);
+}
+
+.sidebar-button-container {
+  width: 100%;
+  height: auto;
+  padding: 0.5rem 1rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  align-items: center;
+}
+.sidebar-button-container:hover {
+  background-color: var(--style_three);
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+.sidebar-button-container:hover .sidebar-button-text,
+.sidebar-button-container:hover .sidebar-button-icon {
+  color: var(--style_one);
+  fill: var(--style_one);
+  transition: color 0.3s;
+}
+
+/* 活動狀態樣式 */
+.sidebar-button-container.active {
+  background-color: var(--style_three);
+  color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.sidebar-button-container.active .sidebar-button-text,
+.sidebar-button-container.active .sidebar-button-icon {
+  color: var(--style_one);
+  fill: var(--style_one);
+}
+
+.sidebar-button-icon :hover {
+  cursor: pointer;
+}
+
+.sidebar-button-icon {
+  width: 1.3rem;
+  height: 1.3rem;
+  fill: white;
+  color: white;
+}
+
+.sidebar-button-text {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: white;
+  margin-left: 1rem;
+}
+
+.sidebar-loggout {
+  margin-top: auto;
+  padding: 0.6rem 1rem;
+  background-color: white;
+  border-radius: 0.5rem;
+}
+
+.sidebar-loggout:hover {
+  scale: 1.05;
+  cursor: pointer;
+  transition: scale 0.3s ease-in-out;
+}
+.sidebar-loggout-content {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.sidebar-loggout-content > p {
+  padding-left: 0.5rem;
+  color: var(--style_one);
+  font-weight: 900;
+}
+
+.sidebar-line-container {
+  background-color: var(--style_one);
+  width: 3rem;
+  max-width: 3rem;
+  height: 100vh;
+  padding: 1rem;
+  gap: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  transition: transform 0.2s ease-in-out;
+}

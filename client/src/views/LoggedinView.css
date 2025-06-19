@@ -1,0 +1,19 @@
+.function-views {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+  width: calc(100% - 300px);
+  max-width: 1400px;
+  height: 100vh;
+  padding: 1rem;
+  margin-left: 300px;
+  padding: 2rem 4rem;
+  gap: 2rem;
+  overflow-y: auto;
+}
+
+.function-views-collapsed {
+  margin-left: 0;
+  width: 100%;
+}

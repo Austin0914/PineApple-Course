@@ -1,0 +1,168 @@
+.announceContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  width: 100%;
+  max-width: 1132px;
+  background-color: var(--style_two);
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  padding: 1rem;
+  box-sizing: border-box;
+}
+.announce-list {
+  padding: 1rem 1rem;
+  background-color: var(--style_three);
+  border-radius: 8px;
+  width: 95%;
+  margin: 0.5rem 1.2rem;
+  gap: 0.5rem;
+}
+.announce-list:hover {
+  box-shadow: 3px 4px 4px var(--style_one);
+  cursor: pointer;
+  transition: box-shadow 0.3s;
+}
+
+.announce-list-date {
+  color: var(--font_lightgray);
+  font-size: 0.8rem;
+}
+
+.announce-list-content {
+  color: var(--font_gray);
+  font-size: 0.8rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.announce-list-button {
+  color: var(--style_one);
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+/* 載入和錯誤狀態樣式 */
+.announce-loading {
+  text-align: center;
+  padding: 2rem;
+  color: var(--font_gray);
+  font-size: 1rem;
+}
+
+.announce-error {
+  text-align: center;
+  padding: 1rem;
+  color: #e74c3c;
+  font-size: 0.9rem;
+  background-color: #ffeaea;
+  border-radius: 8px;
+  margin: 0 1rem;
+}
+
+.no-announcements {
+  text-align: center;
+  padding: 2rem;
+  color: var(--font_lightgray);
+  font-size: 1rem;
+}
+
+/* 彈出視窗樣式 */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background-color: white;
+  border-radius: 12px;
+  max-width: 600px;
+  width: 90%;
+  max-height: 80vh;
+  overflow-y: auto;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+  animation: modalFadeIn 0.3s ease-out;
+}
+
+@keyframes modalFadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem;
+  border-bottom: 1px solid #e0e0e0;
+  background-color: var(--style_two);
+  border-radius: 12px 12px 0 0;
+}
+
+.modal-header h2 {
+  margin: 0;
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--font_black);
+  line-height: 1.4;
+}
+
+.modal-close {
+  background: none;
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
+  color: var(--font_gray);
+  padding: 0;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.2s ease;
+}
+
+.modal-close:hover {
+  background-color: #f0f0f0;
+  color: var(--font_black);
+}
+
+.modal-body {
+  padding: 1.5rem;
+}
+
+.modal-date,
+.modal-end-date {
+  font-size: 0.9rem;
+  color: var(--font_lightgray);
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+}
+
+.modal-content-text {
+  width: 100%;
+  margin-top: 1rem;
+  line-height: 1.6;
+  color: var(--font_black);
+  font-size: 1rem;
+  white-space: pre-line;
+  text-align: left;
+}

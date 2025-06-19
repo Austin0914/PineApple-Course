@@ -1,0 +1,83 @@
+.LoggedOutViewMainContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  min-height: 100vh;
+  width: 100%;
+  max-width: 1132px;
+  margin: 0 auto;
+  padding: 1em;
+  box-sizing: border-box;
+}
+
+.title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: black;
+}
+
+.functionContainer {
+  width: 100%;
+  max-width: 1132px;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 3rem;
+  margin-bottom: 3rem;
+}
+
+.login-flex {
+  flex: 0 0 auto;
+  width: 400px;
+  min-width: 300px;
+}
+
+.timeline-flex {
+  flex: 1;
+  min-width: 500px;
+  margin-left: 2rem;
+}
+
+/* 響應式設計 */
+@media (max-width: 1024px) {
+  .functionContainer {
+    flex-direction: column;
+    gap: 2rem;
+    align-items: center;
+  }
+
+  .login-flex,
+  .timeline-flex {
+    width: 100%;
+    margin-left: 0;
+  }
+
+  .login-flex {
+    display: flex;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 768px) {
+  .functionContainer {
+    gap: 1.5rem;
+    padding: 0 0.5rem;
+  }
+
+  .LoggedOutViewMainContainer {
+    padding: 0.5em;
+  }
+}
+
+@media (max-width: 1200px) {
+  .LoggedOutViewMainContainer {
+    padding: 1em;
+  }
+
+  .functionContainer {
+    gap: 2rem;
+  }
+}

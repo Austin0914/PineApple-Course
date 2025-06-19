@@ -1,0 +1,706 @@
+.course-selection {
+  padding: 1.5rem;
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  background-color: var(--style_two);
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.course-selection-header {
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.course-selection-header h2 {
+  color: var(--style_one);
+  margin-bottom: 0.5rem;
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.course-selection-header p {
+  color: #666;
+  font-size: 1.1rem;
+}
+
+/* 訊息樣式 */
+.message {
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: opacity 0.3s;
+}
+
+.message svg {
+  margin-right: 0.5rem;
+  font-size: 1.2rem;
+}
+
+.error-message {
+  background-color: #fee;
+  color: #c53030;
+  border: 1px solid #feb2b2;
+}
+
+.success-message {
+  background-color: #f0fff4;
+  color: #38a169;
+  border: 1px solid #9ae6b4;
+}
+
+/* 篩選區域 */
+.course-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding: 1.5rem;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  margin-bottom: 2rem;
+  align-items: end;
+}
+
+.filter-group {
+  display: flex;
+  flex-direction: column;
+  min-width: 120px;
+}
+
+.filter-group label {
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.filter-group select {
+  padding: 0.5rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 1rem;
+  background-color: white;
+}
+
+.filter-group select:focus {
+  outline: none;
+  border-color: var(--style_one);
+  box-shadow: 0 0 0 2px rgba(255, 165, 0, 0.2);
+}
+
+/* 固定學期顯示樣式 */
+.fixed-term {
+  padding: 0.5rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 1rem;
+  background-color: #f8f9fa;
+  color: #495057;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  min-height: 38px;
+}
+
+.filter-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.apply-filters-btn,
+.clear-filters-btn {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: background-color 0.3s;
+}
+
+.apply-filters-btn {
+  background-color: var(--style_one);
+  color: white;
+}
+
+.apply-filters-btn:hover {
+  background-color: #e6940a;
+}
+
+.clear-filters-btn {
+  background-color: #6c757d;
+  color: white;
+}
+
+.clear-filters-btn:hover {
+  background-color: #5a6268;
+}
+
+/* 課程列表 */
+.course-list {
+  display: grid;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.course-card {
+  background-color: white;
+  border: 1px solid #e1e5e9;
+  border-radius: 8px;
+  padding: 1.5rem;
+  transition: box-shadow 0.3s, transform 0.2s;
+}
+
+.course-card:hover {
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+}
+
+.course-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid #eee;
+}
+
+.course-title {
+  color: var(--style_one);
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+.course-code {
+  background-color: var(--style_one);
+  color: white;
+  padding: 0.3rem 0.8rem;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+/* 課程主要資訊區域 */
+.course-main-info {
+  margin-bottom: 1rem;
+}
+
+.info-row {
+  display: flex;
+  flex-direction: row;
+  gap: 3rem;
+  margin-bottom: 1.2rem;
+  align-items: start;
+  justify-content: start;
+}
+
+.info-row:last-child {
+  margin-bottom: 0;
+}
+
+.course-detailed-info {
+  border-top: 1px solid #eee;
+  padding-top: 1rem;
+  margin-bottom: 1rem;
+  animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    max-height: 0;
+    padding-top: 0;
+  }
+  to {
+    opacity: 1;
+    max-height: 300px;
+    padding-top: 1rem;
+  }
+}
+
+.detail-section {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 0.8rem;
+  margin-bottom: 1rem;
+}
+
+.course-info {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 0.8rem;
+  margin-bottom: 1rem;
+}
+
+.info-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-width: 120px;
+}
+
+.info-icon {
+  color: var(--style_one);
+  font-size: 1rem;
+}
+
+.info-label {
+  font-weight: 600;
+  color: #333;
+  margin-right: 0.5rem;
+}
+
+.course-teachers {
+  margin-bottom: 1rem;
+  padding: 0.8rem;
+  background-color: #f8f9fa;
+  border-radius: 4px;
+  color: #333;
+}
+
+.course-note {
+  margin-bottom: 1rem;
+  padding: 0.8rem;
+  background-color: #fff3cd;
+  border: 1px solid #ffeaa7;
+  border-radius: 4px;
+  color: #856404;
+  font-size: 0.9rem;
+}
+
+.course-note strong {
+  color: #6c5000;
+}
+
+.course-outline {
+  margin-bottom: 1rem;
+  padding: 0.8rem;
+  background-color: #e3f2fd;
+  border: 1px solid #90caf9;
+  border-radius: 4px;
+  color: #1565c0;
+  font-size: 0.9rem;
+}
+
+.course-outline strong {
+  color: #0d47a1;
+}
+
+.outline-link {
+  color: #1976d2;
+  text-decoration: none;
+  font-weight: 600;
+  border-bottom: 1px dotted #1976d2;
+}
+
+.outline-link:hover {
+  color: #0d47a1;
+  border-bottom: 1px solid #0d47a1;
+}
+
+.course-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+.toggle-details-btn {
+  padding: 0.5rem 1rem;
+  background-color: #f8f9fa;
+  color: #495057;
+  border: 1px solid #dee2e6;
+  border-radius: 4px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  transition: background-color 0.3s;
+}
+
+.toggle-details-btn:hover {
+  background-color: #e9ecef;
+}
+
+.enroll-btn {
+  padding: 0.7rem 1.5rem;
+  background-color: var(--style_one);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  flex-shrink: 0;
+}
+
+.enroll-btn:hover:not(:disabled) {
+  background-color: #e6940a;
+}
+
+.enroll-btn:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+/* 選課人數顯示樣式 */
+.enrollment-info {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-weight: 500;
+}
+
+.enrollment-count {
+  color: #333;
+}
+
+.enrollment-limit {
+  color: #333;
+}
+
+.enrollment-full {
+  color: #dc3545;
+  font-weight: 600;
+}
+
+.enrollment-available {
+  color: #333;
+}
+
+.enrollment-status {
+  font-size: 0.9rem;
+  color: #dc3545;
+  font-weight: 600;
+  margin-left: 0.5rem;
+}
+
+/* 載入和空狀態 */
+.loading,
+.no-courses,
+.no-search {
+  text-align: center;
+  padding: 3rem;
+  color: #666;
+  font-size: 1.1rem;
+}
+
+.no-search {
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  border: 2px dashed #dee2e6;
+}
+
+.no-search .search-icon {
+  font-size: 3rem;
+  color: var(--style_one);
+  margin-bottom: 1rem;
+}
+
+.no-search p {
+  margin: 0.5rem 0;
+}
+
+.search-hint {
+  font-size: 1rem;
+  color: #888;
+  font-style: italic;
+}
+
+.loading {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: loading 1.5s infinite;
+  border-radius: 4px;
+}
+
+@keyframes loading {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* 分頁 */
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.pagination-btn {
+  padding: 0.5rem 1rem;
+  background-color: var(--style_one);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.pagination-btn:hover:not(:disabled) {
+  background-color: #e6940a;
+}
+
+.pagination-btn:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.pagination-info {
+  color: #666;
+  font-weight: 600;
+}
+
+/* 響應式設計 */
+@media (max-width: 768px) {
+  .course-selection {
+    padding: 1rem;
+  }
+
+  .course-filters {
+    flex-direction: column;
+  }
+
+  .filter-actions {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .course-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .info-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .detail-section {
+    grid-template-columns: 1fr;
+  }
+
+  .course-actions {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .toggle-details-btn,
+  .enroll-btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .pagination {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .course-selection-header h2 {
+    font-size: 1.5rem;
+  }
+
+  .course-card {
+    padding: 1rem;
+  }
+  .course-title {
+    font-size: 1.1rem;
+  }
+}
+
+/* Modal 樣式 */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  backdrop-filter: blur(2px);
+}
+
+.modal-content {
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+  max-width: 380px;
+  width: 90%;
+  overflow: hidden;
+  border: 1px solid var(--style_two);
+}
+
+.modal-header {
+  text-align: center;
+  padding: 2.5rem 2rem 1rem;
+  background: var(--style_two);
+}
+
+.modal-icon {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1rem;
+  font-size: 2.5rem;
+  position: relative;
+}
+
+.modal-icon.success {
+  background: var(--style_check);
+  color: white;
+  box-shadow: 0 8px 25px rgba(126, 217, 87, 0.3);
+}
+
+.modal-icon.error {
+  background: #dc3545;
+  color: white;
+  box-shadow: 0 8px 25px rgba(220, 53, 69, 0.3);
+}
+
+.modal-body {
+  text-align: center;
+  background-color: var(--style_two);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0 2rem 2rem;
+}
+
+.modal-message {
+  font-size: 1.3rem;
+  color: #2c3e50;
+  margin: 0;
+  line-height: 1.6;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+}
+
+.modal-footer {
+  padding: 1.5rem 2rem 2rem;
+  text-align: center;
+  background: var(--style_two);
+}
+
+.modal-close-btn {
+  background: var(--style_one);
+  color: white;
+  border: none;
+  padding: 0.9rem 2.5rem;
+  border-radius: 50px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  min-width: 120px;
+  box-shadow: 0 4px 15px rgba(79, 70, 229, 0.3);
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+}
+
+.modal-close-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(79, 70, 229, 0.4);
+  background: #3730a3;
+}
+
+.modal-close-btn:active {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 15px rgba(79, 70, 229, 0.3);
+}
+
+/* Modal 動畫 */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-40px) scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes iconPulse {
+  0% {
+    transform: scale(0.3);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Modal 響應式設計 */
+@media (max-width: 480px) {
+  .modal-content {
+    width: 95%;
+    margin: 1rem;
+    max-width: 340px;
+  }
+
+  .modal-header {
+    padding: 2rem 1.5rem 0.8rem;
+  }
+
+  .modal-icon {
+    width: 70px;
+    height: 70px;
+    font-size: 2.2rem;
+  }
+
+  .modal-body {
+    padding: 0 1.5rem 1.5rem;
+  }
+
+  .modal-message {
+    font-size: 1.2rem;
+  }
+
+  .modal-footer {
+    padding: 1.2rem 1.5rem 1.8rem;
+  }
+
+  .modal-close-btn {
+    padding: 0.8rem 2rem;
+    font-size: 0.85rem;
+    min-width: 100px;
+  }
+}
